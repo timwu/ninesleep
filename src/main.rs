@@ -154,7 +154,7 @@ fn temperature_duration(
     }
     let mut streamoption = streamobj.write().unwrap();
     let stream = streamoption.as_mut().unwrap();
-    let _ = stream.write(format!("{}\n{}\n\n", command, data).as_bytes());
+    let _ = stream.write(format!("{}\n{}\n\n", command, data.replace("\n", "")).as_bytes());
     let _ = stream.set_read_timeout(Some(Duration::new(0, 50000000)));
     let mut result = String::new();
     let _ = stream.read_to_string(&mut result);
@@ -181,7 +181,7 @@ fn temperature(
     }
     let mut streamoption = streamobj.write().unwrap();
     let stream = streamoption.as_mut().unwrap();
-    let _ = stream.write(format!("{}\n{}\n\n", command, data).as_bytes());
+    let _ = stream.write(format!("{}\n{}\n\n", command, data.replace("\n", "")).as_bytes());
     let _ = stream.set_read_timeout(Some(Duration::new(0, 50000000)));
     let mut result = String::new();
     let _ = stream.read_to_string(&mut result);
